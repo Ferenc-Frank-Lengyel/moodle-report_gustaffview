@@ -15,26 +15,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Display Student MyGrades Staff View 2.0 (Beta) report
+ * Settings for Student MyGrades Staff View 2.0 (Beta) report
  *
  * @package    report_gustaffview
  * @copyright  2026 Ferenc 'Frank' Fengyel, ferenc.lengyel@glasgow.ac.uk
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use core\report_helper;
+defined('MOODLE_INTERNAL') || die();
 
-require('../../config.php');
-require_once($CFG->libdir . '/adminlib.php');
+$ADMIN->add('reports', new admin_externalpage('reportgustaffview', get_string('pluginname', 'report_gustaffview'),
+    new moodle_url("/report/gustaffview/index.php")));
 
-$courseid = required_param('id', PARAM_INT);
-$course = $DB->get_record('course', ['id' => $courseid], '*', MUST_EXIST);
-
-admin_externalpage_setup('reportgustaffview', '', null, '', ['pagelayout' => 'report']);
-
-echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('pluginname', 'report_gustaffview'));
-
-echo "<p>TODO</p>";
-
-echo $OUTPUT->footer();
+// No report settings.
+$settings = null;

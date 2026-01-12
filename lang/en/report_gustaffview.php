@@ -25,6 +25,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['gustaffview:view'] = 'View Student MyGrades Staff View 2.0 (Beta) report';
+$string['gustaffview:view'] = 'View the Staff View of Student MyGrades report page';
 $string['pluginname'] = 'Student MyGrades Staff View 2.0 (Beta)';
 $string['privacy:metadata'] = 'The Student MyGrades Staff View 2.0 (Beta) plugin doesn\'t store any personal data.';
