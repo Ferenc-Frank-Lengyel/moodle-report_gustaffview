@@ -30,9 +30,35 @@
  * @param context $context The context of the course
  */
 function report_gustaffview_extend_navigation_course($navigation, $course, $context) {
+    global $CFG, $PAGE;
+
+    // Your custom field condition here.
+    $handler = \core_customfield\handler::get_handler('core_course', 'course');
+    $datas   = $handler->get_instance_data($course->id);
+
+    $requiredshortname = 'studentmygrades';
+    $enabled = false;
+    foreach ($datas as $data) {
+        $field = $data->get_field();
+        if ($field->get('shortname') === $requiredshortname && $data->get_value()) {
+            $enabled = true;
+            break;
+        }
+    }
+
+    if (!$enabled) {
+        return; // Do not add the report to navigation.
+    }
+
     if (has_capability('report/gustaffview:view', $context)) {
         $url = new moodle_url('/report/gustaffview/index.php', ['id' => $course->id]);
-        $navigation->add(get_string('pluginname', 'report_gustaffview'), $url, navigation_node::TYPE_SETTING,
-            null, null, new pix_icon('i/report', ''));
+        $navigation->add(
+            get_string('pluginname', 'report_gustaffview'),
+            $url,
+            navigation_node::TYPE_SETTING,
+            null,
+            'gustaffview',
+            new pix_icon('i/report', '')
+        );
     }
 }
